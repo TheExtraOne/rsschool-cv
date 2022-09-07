@@ -35,7 +35,72 @@ As I want to put the finishing touches to this part of CV, I should simply add, 
 * Methodologies: BEM
 -------------------
 ### Code example:
+```
+'use strict'
 
+class HashStorageFunc {
+  constructor() {
+    this.items = {};
+  }
+  addValue(key, value) {					
+    this.items[key] = value;
+  }
+  getValue(key) {
+    return this.items[key];
+  }
+  deleteValue(key) {
+    if (key in this.items) {
+      delete this.items[key];
+      return true;
+    } else {
+      return false;
+    }
+  }
+  getKeys() {
+    return Object.keys(this.items);
+  }
+}
+
+let drinkStorage = new HashStorageFunc();
+
+let addUserInfoButton = document.querySelector('.addUserInfoButton');
+addUserInfoButton.addEventListener('click', addUserInfo, false);
+
+let getDrinkInfoButton = document.querySelector('.getDrinkInfoButton');
+getDrinkInfoButton.addEventListener('click', getDrinkInfo, false);
+
+let deleteDrinkInfoButton = document.querySelector('.deleteDrinkInfoButton');
+deleteDrinkInfoButton.addEventListener('click', deleteDrinkInfo, false);
+
+let userDrinksListButton = document.querySelector('.userDrinksListButton');
+userDrinksListButton.addEventListener('click', userDrinksList, false);
+
+function addUserInfo() {  
+  let drinkName = prompt('Введите название напитка');
+  let containAlc = confirm('Если напиток алкогольный, нажмите "ОК", если нет - то "Отмена"') ? 'да' : 'нет';
+  let drinkRecipe = prompt('Ведите рецепт напитка');
+
+  drinkStorage.addValue( drinkName, {'alco' : containAlc, 'recipe' : drinkRecipe,} );
+}
+
+function getDrinkInfo() {   
+  let drinkName = prompt('Введите название напитка');
+  let result = drinkStorage.getValue(drinkName);
+
+  (result) ? alert('напиток ' + drinkName + '\n алкогольный: ' + result.alco + '\n рецепт приготовления: ' + result.recipe) : alert('Такого напитка в хранилище нет');
+}
+
+function deleteDrinkInfo() {  
+  let drinkName = prompt('Введите название напитка');
+  let result = drinkStorage.deleteValue(drinkName);
+  
+  (result) ? alert('Рецепт удалён') : alert('Такого напитка в хранилище нет');
+}
+
+function userDrinksList() {
+  return alert(drinkStorage.getKeys());
+}
+```
 -------------------
 ### Education and experience:
 * Basics of Computed Science (it-academy)

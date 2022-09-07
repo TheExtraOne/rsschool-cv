@@ -33,9 +33,11 @@ As I want to put the finishing touches to this part of my CV, I should simply ad
 * Git, GitHub
 * Visual Studio Code
 * Methodologies: BEM
+
 -------------------
 ### Code example:
-```'use strict'
+``` 
+'use strict'
 
 class HashStorageFunc {
   constructor() {
